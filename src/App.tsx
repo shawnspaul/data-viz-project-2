@@ -2,7 +2,6 @@ import * as React from 'react';
 import { styled } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
-import Header from './Navbar';
 import Navbar from './Navbar';
 
 const DrawerHeader = styled('div')(({ theme }) => ({
