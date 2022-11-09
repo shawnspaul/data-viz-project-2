@@ -18,7 +18,7 @@ export const getLum = (group_id: number, keys: string[]) => {
                     percentage: 0
                 }
             }
-            if (listItem['last tweet text'].toLowerCase().includes(k.toLowerCase()) && listItem['modularity class'] == group_id) {
+            if (listItem['last tweet text'].toLowerCase().includes(k.toLowerCase()) && listItem['modularity class'] === group_id) {
                 results[k].count++;
             }
         });
@@ -27,6 +27,6 @@ export const getLum = (group_id: number, keys: string[]) => {
     Object.entries(results).forEach(([k,v]) => {
         results[k].percentage = results[k].count / numberOfTweets;
     });
-    
+
     return results;
 }
