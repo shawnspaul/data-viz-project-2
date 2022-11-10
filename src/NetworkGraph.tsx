@@ -42,7 +42,7 @@ const NetworkGraph: React.FC<{}> = () => {
         });
         networkList.forEach((l) => {
             try {
-                g.addEdge(l.source, l.target, { type: "arrow", size: 1 })
+                g.addEdge(l.source, l.target, { type: "arrow", size: 0.1 })
             } catch (e) {
                 console.log(e);
             }

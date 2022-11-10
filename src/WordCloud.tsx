@@ -15,10 +15,7 @@ const WordCloud = (props: Props) => {
         minSize={12}
         maxSize={35}
         tags={props.words}
-        colorOptions={{
-            count: 1,
-            hue: "white"
-        }}
+        disableRandomColor
     />;
 }
 

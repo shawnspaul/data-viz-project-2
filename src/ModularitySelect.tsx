@@ -1,11 +1,16 @@
 import * as React from 'react';
 import { useRecoilState } from 'recoil';
-import ModularityGroup, { ModGroups } from './State/ModularityGroups';
+import ModularityGroup, { getModColor, ModGroups } from './State/ModularityGroups';
 import { ToggleButton, ToggleButtonGroup } from '@mui/material';
+import FiberManualRecordIcon from '@mui/icons-material/FiberManualRecord';
 
 const ModularitySelect = () => {
     const [ modGroup, setModGroup ] = useRecoilState(ModularityGroup);
-    const buttons = ModGroups.map(mg => <ToggleButton value={mg}>{mg.title}</ToggleButton>);
+    const buttons = ModGroups.map(mg => 
+        <ToggleButton value={mg}>
+            <FiberManualRecordIcon style={{ color: mg.color}} />{mg.title}
+        </ToggleButton>
+    );
 
     return (
         <ToggleButtonGroup
