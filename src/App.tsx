@@ -8,6 +8,7 @@ import { Paper } from '@mui/material';
 import ModularitySelect from './ModularitySelect';
 import { useRecoilValue } from 'recoil';
 import ModularityGroup from './State/ModularityGroups';
+import NetworkGraph from './NetworkGraph';
 
 const DrawerHeader = styled('div')(({ theme }) => ({
     display: 'flex',
@@ -44,6 +45,11 @@ export default function App() {
                 <div style={{ width: '20%' }}>
                     <Paper>
                        <WordCloud words={words}/>
+                    </Paper>
+                </div>
+                <div style={{ width: '50%' }}>
+                    <Paper>
+                       <NetworkGraph/>
                     </Paper>
                 </div>
             </Box>
