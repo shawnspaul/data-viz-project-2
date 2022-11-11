@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { useRecoilState } from 'recoil';
-import ModularityGroup, { getModColor, ModGroups } from './State/ModularityGroups';
+import ModularityGroup, { ModGroups } from './State/ModularityGroups';
 import { ToggleButton, ToggleButtonGroup } from '@mui/material';
 import FiberManualRecordIcon from '@mui/icons-material/FiberManualRecord';
 

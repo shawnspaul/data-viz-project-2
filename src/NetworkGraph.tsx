@@ -30,13 +30,13 @@ const NetworkGraph: React.FC<{}> = () => {
                 size: 10,
                 color
             });
-            if (i === 20) {
+            
+            if (i < 20) {
+                x = x + 1
+            } else if (i === 20) {
                 i = 0;
                 y = y + 1;
                 x = 0;
-            }
-            if (i < 20) {
-                x = x + 1
             }
             i++;
         });
