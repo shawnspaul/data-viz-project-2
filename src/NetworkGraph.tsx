@@ -51,21 +51,21 @@ const NetworkGraph: React.FC<{}> = () => {
         setGraph(g);
     },[])
 
-    const GraphEvents: React.FC = () => {
-        const registerEvents = useRegisterEvents();
+    // const GraphEvents: React.FC = () => {
+    //     const registerEvents = useRegisterEvents();
     
-        useEffect(() => {
-          // Register the events
-          registerEvents({
-            // node events
-            clickNode: (event) => console.log("clickNode", event.event, event.node, event.preventSigmaDefault),
-            enterNode: (event) => console.log("enterNode", event),
-            leaveNode: (event) => console.log("leaveNode", event),
-          });
-        }, [registerEvents]);
+    //     useEffect(() => {
+    //       // Register the events
+    //       registerEvents({
+    //         // node events
+    //         clickNode: (event) => console.log("clickNode", event.event, event.node, event.preventSigmaDefault),
+    //         enterNode: (event) => console.log("enterNode", event),
+    //         leaveNode: (event) => console.log("leaveNode", event),
+    //       });
+    //     }, [registerEvents]);
     
-        return null;
-      };
+    //     return null;
+    //   };
   
   
   return (
