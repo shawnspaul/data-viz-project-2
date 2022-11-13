@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import "@react-sigma/core/lib/react-sigma.min.css";
 import { MultiDirectedGraph } from "graphology";
 import getNodeProgramImage from "sigma/rendering/webgl/programs/node.image";
-import { SigmaContainer, ControlsContainer, FullScreenControl, useRegisterEvents } from "@react-sigma/core";
+import { SigmaContainer, ControlsContainer, FullScreenControl } from "@react-sigma/core";
 import { LayoutForceAtlas2Control } from "@react-sigma/layout-forceatlas2";
 import networkList from "./assets/network_connections.json";
 import list from './assets/list.json';
