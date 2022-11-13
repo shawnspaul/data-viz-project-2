@@ -16,6 +16,8 @@ import ListItemButton from '@mui/material/ListItemButton';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import GraphicEqIcon from '@mui/icons-material/GraphicEq';
+import { useNavigate } from 'react-router-dom';
+
 
 const drawerWidth = 240;
 
@@ -89,6 +91,7 @@ const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' 
 );
 
 export default function Navbar() {
+  const navigate = useNavigate()
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
 
@@ -129,7 +132,7 @@ export default function Navbar() {
         </DrawerHeader>
         <Divider />
         <List>
-            <ListItem key={'graphs'} disablePadding sx={{ display: 'block' }}>
+            <ListItem key={'home'} disablePadding sx={{ display: 'block' }}  onClick={() => navigate('/')} >
               <ListItemButton
                 sx={{
                   minHeight: 48,
@@ -146,7 +149,47 @@ export default function Navbar() {
                 >
                   <GraphicEqIcon/>
                 </ListItemIcon>
-                <ListItemText primary={'Graphs'} sx={{ opacity: open ? 1 : 0 }} />
+                <ListItemText primary={'Dashboard'} sx={{ opacity: open ? 1 : 0 }} />
+              </ListItemButton>
+            </ListItem>
+            <ListItem key={'docs'} disablePadding sx={{ display: 'block' }} onClick={() => navigate('/documentation')}>
+              <ListItemButton
+                sx={{
+                  minHeight: 48,
+                  justifyContent: open ? 'initial' : 'center',
+                  px: 2.5,
+                }}
+              >
+                <ListItemIcon
+                  sx={{
+                    minWidth: 0,
+                    mr: open ? 3 : 'auto',
+                    justifyContent: 'center',
+                  }}
+                >
+                  <GraphicEqIcon/>
+                </ListItemIcon>
+                <ListItemText primary={'Documentation'}  sx={{ opacity: open ? 1 : 0 }} />
+              </ListItemButton>
+            </ListItem>
+            <ListItem key={'last-tweets'} disablePadding sx={{ display: 'block' }} onClick={() => navigate('/last-tweets')}>
+              <ListItemButton
+                sx={{
+                  minHeight: 48,
+                  justifyContent: open ? 'initial' : 'center',
+                  px: 2.5,
+                }}
+              >
+                <ListItemIcon
+                  sx={{
+                    minWidth: 0,
+                    mr: open ? 3 : 'auto',
+                    justifyContent: 'center',
+                  }}
+                >
+                  <GraphicEqIcon/>
+                </ListItemIcon>
+                <ListItemText primary={'Last Tweets'} sx={{ opacity: open ? 1 : 0 }} />
               </ListItemButton>
             </ListItem>
         </List>

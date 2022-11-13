@@ -18,7 +18,7 @@ const rows = list.map((i) => ({
     ...i,
     id: uuidv4(),
 }));
-const Table = () => {
+const LastTweets = () => {
 
     return  <div style={{ height: '90vh', width: '100%' }}>
         <DataGrid
@@ -31,5 +31,5 @@ const Table = () => {
     </div>
 }
 
-export default Table
+export default LastTweets
 

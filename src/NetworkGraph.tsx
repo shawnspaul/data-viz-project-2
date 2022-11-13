@@ -27,7 +27,7 @@ const NetworkGraph: React.FC<{}> = () => {
                 y, 
                 label: l["user name"], 
                 cluster_id: l["luminaries group number"],
-                size: 10,
+                size: 3,
                 color
             });
             
@@ -84,14 +84,14 @@ const NetworkGraph: React.FC<{}> = () => {
       }}
     >
       <ControlsContainer position={"bottom-right"}>
-        <ZoomControl />
+        {/* <ZoomControl /> */}
         <FullScreenControl />
         <LayoutForceAtlas2Control />
       </ControlsContainer>
-      <ControlsContainer position={"top-right"}>
+      {/* <ControlsContainer position={"top-right"}>
         <SearchControl style={{ width: "200px" }} />
-      </ControlsContainer>
-      <GraphEvents />
+      </ControlsContainer> */}
+      {/* <GraphEvents /> */}
     </SigmaContainer>
   );
 };

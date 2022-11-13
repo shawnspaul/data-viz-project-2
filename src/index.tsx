@@ -5,6 +5,7 @@ import App from './App';
 import { RecoilRoot } from 'recoil';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
+import { BrowserRouter } from 'react-router-dom';
 
 const darkTheme = createTheme({
   palette: {
@@ -21,9 +22,10 @@ root.render(
     <RecoilRoot>
     <ThemeProvider theme={darkTheme}>
       <CssBaseline />
-      <App />
+      <BrowserRouter>
+        <App />
+      </BrowserRouter>
     </ThemeProvider>
-      
     </RecoilRoot>
     
   </React.StrictMode>
