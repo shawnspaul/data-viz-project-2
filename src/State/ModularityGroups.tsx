@@ -1,4 +1,4 @@
-import { atom } from 'recoil';
+import { atom, selector } from 'recoil';
 
 export type ModGroup = {
     id: number;
@@ -50,9 +50,17 @@ export const getModColor = (modGroup: number) => {
     return "#000000";
 }
 
-const ModularityGroup = atom<ModGroup>({
+const ModularityGroup = atom<ModGroup[]>({
     key: 'modGroup',
-    default: ModGroups[0]
+    default: ModGroups
 });
+
+export const ModGroupsSelector = selector({
+    key: 'modGroupSelector',
+    get: ({get}) => {
+        const groups = get(ModularityGroup);
+        return groups.map((g) => g.id);
+    }
+})
 
 export default ModularityGroup

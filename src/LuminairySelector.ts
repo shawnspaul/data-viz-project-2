@@ -30,3 +30,12 @@ export const getLum = (group_id: number, keys: string[]) => {
 
     return results;
 }
+
+export const getProfileFromHandle = (handle: string) => {
+    for (let u of List) {
+        if (u.handle === handle) {
+            return u;
+        }
+    }
+    return List[0];
+}
