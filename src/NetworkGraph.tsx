@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useRef } from "react";
 import networkList from "./assets/network_connections.json";
 import list from './assets/list.json';
 import { getModColor, ModGroupsSelector } from "./State/ModularityGroups";
@@ -325,7 +325,7 @@ const NetworkGraph: React.FC<{}> = () => {
     const setSelectedUser = useSetRecoilState(SelectedUser);
     const modGroups = useRecoilValue(ModGroupsSelector);
     //@ts-nocheck
-    let graph: IGraph;
+    const graph = useRef<IGraph>()
 
     useEffect(() => {
         const container = document.getElementById('network-graph');
@@ -363,7 +363,7 @@ const NetworkGraph: React.FC<{}> = () => {
             });
             const width = container.scrollWidth;
             const height = container.scrollHeight || 500;
-            graph = new G6.Graph({
+            graph.current = new G6.Graph({
                 container: 'network-graph',
                 width,
                 height,
@@ -405,18 +405,22 @@ const NetworkGraph: React.FC<{}> = () => {
                 }
                 
             });
-            graph.data(data);
+            graph.current.data(data);
             
-            graph.render();
+            graph.current.render();
 
-            graph.on('node:mouseleave', (e) => {
-                const nodeItems = graph.getNodes();
-                const edgeItems = graph.getEdges();
+            graph.current.on('node:mouseleave', (e) => {
+                //@ts-ignore
+                const nodeItems = graph.current.getNodes();
+                //@ts-ignore
+                const edgeItems = graph.current.getEdges();
                 nodeItems.forEach((item) => {
-                    graph.setItemState(item, 'dark', false);
+                    //@ts-ignore
+                    graph.current.setItemState(item, 'dark', false);
                 });
                 edgeItems.forEach((item) => {
-                    graph.setItemState(item, 'dark', false);
+                    //@ts-ignore
+                    graph.current.setItemState(item, 'dark', false);
                 });
             });
             let showNodes: any[] = [];
@@ -432,15 +436,19 @@ const NetworkGraph: React.FC<{}> = () => {
             let currentFocus: EdgeConfig | TreeGraphData | NodeConfig | ComboConfig | undefined;
             nodes = data.nodes;
             // edges = data.edges;
-            graph.on('node:mouseenter', (e) => {
+            graph.current.on('node:mouseenter', (e) => {
                 const item = e.item;
                 const model = item?.getModel();
                 // highlighting = true;
-                graph.setAutoPaint(false);
-                const nodeItems = graph.getNodes();
-                const edgeItems = graph.getEdges();
+                //@ts-ignore
+                graph.current.setAutoPaint(false);
+                //@ts-ignore
+                const nodeItems = graph.current.getNodes();
+                //@ts-ignore
+                const edgeItems = graph.current.getEdges();
                 nodeItems.forEach((node) => {
-                  graph.setItemState(node, 'dark', true);
+                    //@ts-ignore
+                  graph.current.setItemState(node, 'dark', true);
                   node.getModel().light = false;
                 });
                 //@ts-ignore
@@ -452,7 +460,8 @@ const NetworkGraph: React.FC<{}> = () => {
                 nodeItems.forEach((item) => {
                   const node = item.getModel();
                   if (findTagsMap.get(node.tag) !== undefined) {
-                    graph.setItemState(item, 'dark', false);
+                    //@ts-ignore
+                    graph.current.setItemState(item, 'dark', false);
                     node.light = true;
                   }
                 });
@@ -460,16 +469,20 @@ const NetworkGraph: React.FC<{}> = () => {
                   const source = item.getSource().getModel();
                   const target = item.getTarget().getModel();
                   if (source.light && target.light) {
-                    graph.setItemState(item, 'dark', false);
+                    //@ts-ignore
+                    graph.current.setItemState(item, 'dark', false);
                   } else {
-                    graph.setItemState(item, 'dark', true);
+                    //@ts-ignore
+                    graph.current.setItemState(item, 'dark', true);
                   }
                 });
-                graph.paint();
-                graph.setAutoPaint(true);
+                //@ts-ignore
+                graph.current.paint();
+                //@ts-ignore
+                graph.current.setAutoPaint(true);
             });
 
-            graph.on('node:click', (e) => {
+            graph.current.on('node:click', (e) => {
                 curShowNodes = [];
                 curShowEdges = [];
                 const item = e.item;
@@ -478,13 +491,16 @@ const NetworkGraph: React.FC<{}> = () => {
                     // if clicked a root, hide unrelated items and show the related items
                     //@ts-ignore
                     if (model.level === 0) {
-                    const layoutController = graph.get('layoutController');
+                        //@ts-ignore
+                    const layoutController = graph.current.get('layoutController');
                     const forceLayout = layoutController.layoutMethods[0];
                     forceLayout.forceSimulation.stop();
                     // light the level 0 nodes
                     showNodes.forEach((snode) => {
-                        const item = graph.findById(snode.id);
-                        graph.setItemState(item, 'dark', false);
+                        //@ts-ignore
+                        const item = graph.current.findById(snode.id);
+                        //@ts-ignore
+                        graph.current.setItemState(item, 'dark', false);
                         if (snode.x < 0.5 * width) {
                         snode.x = 300;
                         } else {
@@ -498,15 +514,20 @@ const NetworkGraph: React.FC<{}> = () => {
                     // animatively hide the items which are going to disappear
                     if (curShowEdges.length) {
                         curShowEdges.forEach((csedge: { id: string; }) => {
-                        const item = graph.findById(csedge.id);
-                        item && graph.setItemState(item, 'disappearing', true);
+                            //@ts-ignore
+                        const item = graph.current.findById(csedge.id);
+                        //@ts-ignore
+                        item && graph.current.setItemState(item, 'disappearing', true);
                         });
                     }
                     curShowNodes.forEach((csnode: { id: string; }) => {
-                        const item = graph.findById(csnode.id);
-                        item && graph.setItemState(item, 'disappearing', true);
+                        //@ts-ignore
+                        const item = graph.current.findById(csnode.id);
+                        //@ts-ignore
+                        item && graph.current.setItemState(item, 'disappearing', true);
                     });
-                    graph.positionsAnimate();
+                    //@ts-ignore
+                    graph.current.positionsAnimate();
                 
                     // reset curShowNodes nad curShowEdges
                     curShowNodes = [];
@@ -523,7 +544,8 @@ const NetworkGraph: React.FC<{}> = () => {
                         // click other focus node, hide the current small nodes and show the related nodes
                         currentFocus = model;
                         // change data after the original items disappearing
-                        const layoutController = graph.get('layoutController');
+                        //@ts-ignore
+                        const layoutController = graph.current.get('layoutController');
                         layoutController.layoutCfg.nodeStrength = () => {
                         return -80;
                         };
@@ -683,16 +705,19 @@ const NetworkGraph: React.FC<{}> = () => {
             });
             if (typeof window !== 'undefined') {
                 window.onresize = () => {
-                    if (!graph || graph.get('destroyed')) return;
+                    //@ts-ignore
+                    if (!graph || graph.current.get('destroyed')) return;
                     if (!container || !container.scrollWidth || !container.scrollHeight) return;
-                    graph.changeSize(container.scrollWidth, container.scrollHeight);
+                    //@ts-ignore
+                    graph.current.changeSize(container.scrollWidth, container.scrollHeight);
                 };
             }
             
         }
           
         return () => {
-            graph.destroy()
+            //@ts-ignore
+            graph.current.destroy()
         }
     },[modGroups]);
 
