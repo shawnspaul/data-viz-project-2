@@ -720,7 +720,7 @@ const NetworkGraph: React.FC<{}> = () => {
             graph.current.destroy()
         }
     //@ts-nocheck @ts-ignore
-    },[modGroups]);
+    },[modGroups,setSelectedUser]);
 
     return <div id="network-graph" style={{width: '100%', height: 500}}></div>
 };
