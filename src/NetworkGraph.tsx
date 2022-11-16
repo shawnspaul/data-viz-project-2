@@ -419,22 +419,22 @@ const NetworkGraph: React.FC<{}> = () => {
                 });
             });
             let showNodes: any[] = [];
-            let showEdges: any[] = [];
+            // let showEdges: any[] = [];
             let curShowNodes: any = [];
             let curShowEdges: any = [];
             let nodes: any[] = [];
-            let edges = [];
+            // let edges = [];
             let nodeMap = new Map();
             let edgesMap = new Map();
             let curShowNodesMap = new Map();
-            let highlighting = false;
+            // let highlighting = false;
             let currentFocus: EdgeConfig | TreeGraphData | NodeConfig | ComboConfig | undefined;
             nodes = data.nodes;
-            edges = data.edges;
+            // edges = data.edges;
             graph.on('node:mouseenter', (e) => {
                 const item = e.item;
                 const model = item?.getModel();
-                highlighting = true;
+                // highlighting = true;
                 graph.setAutoPaint(false);
                 const nodeItems = graph.getNodes();
                 const edgeItems = graph.getEdges();
