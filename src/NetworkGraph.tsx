@@ -324,6 +324,7 @@ G6.registerNode(
 const NetworkGraph: React.FC<{}> = () => {
     const setSelectedUser = useSetRecoilState(SelectedUser);
     const modGroups = useRecoilValue(ModGroupsSelector);
+    //@ts-nocheck
     let graph: IGraph;
 
     useEffect(() => {
