@@ -24,7 +24,7 @@ const ModularitySelect = () => {
             orientation="horizontal"
             value={modGroups}
             onChange={onChange}
-            // onChange={(_, value) => value ? setModGroup(value) : null}
+            size="small"
             aria-label="text alignment"
         >
             {buttons}
