@@ -6,6 +6,7 @@ import G6, { ComboConfig, EdgeConfig, NodeConfig, TreeGraphData, IGraph } from '
 import { v4 as uuidv4 } from 'uuid';
 import { useRecoilValue, useSetRecoilState } from "recoil";
 import SelectedUser from "./State/SelectedUser";
+import Card from "@mui/material/Card/Card";
 G6.registerNode(
     'bubble',
     {
@@ -341,7 +342,8 @@ const NetworkGraph: React.FC<{}> = () => {
                         id: l["handle"],
                         name: l["user name"], 
                         cluster_id: l["luminaries group number"],
-                        color
+                        color,
+                        size: l["followers"]
                     });
                 }
             });
@@ -377,19 +379,8 @@ const NetworkGraph: React.FC<{}> = () => {
                     nodeSpacing: 5,
                     preventOverlap: true,
                 },
-                defaultNode: {
-                    size: 15,
-                },
                 modes: {
                     default: ['zoom-canvas', 'drag-canvas', 'drag-node',
-                    // {
-                    //     type: 'tooltip',
-                    //     formatText(model) {
-                    //       const text = JSON.stringify(model);
-                    //       return text;
-                    //     },
-                    //     shouldUpdate: (e) => true,
-                    // },
                     ],
                 },
             });
@@ -400,6 +391,7 @@ const NetworkGraph: React.FC<{}> = () => {
                     i.style = Object.assign(i.style || {}, {
                         fill: i.color,
                     });
+                    i.size = Math.sqrt(i.size);
                 } catch (e) {
                     console.log(e)
                 }
@@ -452,7 +444,7 @@ const NetworkGraph: React.FC<{}> = () => {
                   node.getModel().light = false;
                 });
                 //@ts-ignore
-                graph.setItemState(item, 'dark', false);
+                // graph.setItemState(item, 'dark', false);
                  //@ts-ignore
                 model.light = true;
                 const findTagsMap = new Map();
@@ -722,7 +714,7 @@ const NetworkGraph: React.FC<{}> = () => {
     //@ts-nocheck @ts-ignore
     },[modGroups,setSelectedUser]);
 
-    return <div id="network-graph" style={{width: '100%', height: 500}}></div>
+    return <Card><div id="network-graph" style={{width: '100%', height: 450}}></div></Card>
 };
 
 export default NetworkGraph;

@@ -11,7 +11,7 @@ export const ModGroups: ModGroup[] = [
     {
         id: 1,
         color: "#0b84a5",
-        title: 'Technology Development',
+        title: 'Technology',
         anchor_words: ['digital', 'data', 'technology', 'annual', 'cost', 'register', 'tool', 'mental', 'sharing', 'summit', 'monitoring', 'remote']
     },
     {
@@ -24,7 +24,7 @@ export const ModGroups: ModGroup[] = [
     {
         id: 2,
         color: "#6f4e7c",
-        title: 'Media, Marketing, and Business Development',
+        title: 'Media & Marketing',
         anchor_words: ['join', 'future', 'october', 'discuss', 'tomorrow', 'officer', 'chief', 'webinar', 'chance', '@colin_hung', 'failure', '#hcldr', 'retail', 'fad']
     },
     {

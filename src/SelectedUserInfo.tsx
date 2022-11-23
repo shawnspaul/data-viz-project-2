@@ -7,6 +7,7 @@ import { Stack, Avatar, Typography, Divider, List, ListItem, ListItemText } from
 import { getModColor } from './State/ModularityGroups';
 import FocusGroupFollowers from './FocusGroupFollowers';
 import { getProfileFromHandle } from './LuminairySelector';
+import UserTweets from './UserTweets';
 
 const SelectedUserInfo = () => {
     const [ selectedUser, setSelectedUser ] = useRecoilState(SelectedUser);
@@ -38,7 +39,14 @@ const SelectedUserInfo = () => {
                 <Typography variant="h5" gutterBottom>
                     {userInfo["user name"]}
                 </Typography>
-                <List aria-label="mailbox folders">
+                <List>
+                    <ListItem>
+                        <ListItemText 
+                            secondary={userInfo["user bio"]}
+                            primary={"user bio"}
+                         />
+                    </ListItem>
+                    <Divider />
                     <ListItem>
                         <ListItemText 
                             secondary={
@@ -69,8 +77,14 @@ const SelectedUserInfo = () => {
                     <Divider />
                     <ListItem divider>
                         <ListItemText 
-                            secondary={userInfo["betweeness centrality"]}
-                            primary="Centrality" 
+                            secondary={userInfo["tweets per day"]}
+                            primary="Tweets/Day" 
+                        />
+                    </ListItem>
+                    <ListItem divider>
+                        <ListItemText 
+                            primary="Tweets" 
+                            secondary={<UserTweets user={userInfo["handle"]}/>}
                         />
                     </ListItem>
                 </List>

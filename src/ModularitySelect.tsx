@@ -21,7 +21,7 @@ const ModularitySelect = () => {
 
     return (
         <ToggleButtonGroup
-            orientation="vertical"
+            orientation="horizontal"
             value={modGroups}
             onChange={onChange}
             // onChange={(_, value) => value ? setModGroup(value) : null}
