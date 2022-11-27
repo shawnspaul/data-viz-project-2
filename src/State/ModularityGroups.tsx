@@ -1,4 +1,5 @@
 import { atom, selector } from 'recoil';
+import list from '../assets/list.json';
 
 export type ModGroup = {
     id: number;
@@ -60,6 +61,21 @@ export const ModGroupsSelector = selector({
     get: ({get}) => {
         const groups = get(ModularityGroup);
         return groups.map((g) => g.id);
+    }
+});
+
+export const ModGroupUsers = selector({
+    key: 'modGroupUsers',
+    get: ({get}) => {
+        const groups = get(ModularityGroup);
+        const groupList = groups.map((g) => g.id);
+        const users = [];
+        for (let user of list) {
+            if (groupList.includes(user['luminaries group number'])) {
+                users.push(user);
+            }
+        }
+        return users;
     }
 })
 

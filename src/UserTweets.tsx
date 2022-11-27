@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import tweets from './assets/raw_tweets.json';
+import tweets from './assets/new_raw_tweets.json';
 import Table from './Table';
 
 type Props = {
@@ -20,7 +20,8 @@ const UserTweets = (props: Props) => {
     },[props.user]);
 
     return <Table data={userTweets.map(ut => ({
-        "Date": ut.date,
+        "Date": ut.tweet_date,
+        "Luminary Group": ut['Luminary Group Name'],
         "Tweet": ut.tweet_text,
     }))}/>
 }

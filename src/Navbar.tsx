@@ -15,8 +15,8 @@ import ListItem from '@mui/material/ListItem';
 import ListItemButton from '@mui/material/ListItemButton';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
-import GraphicEqIcon from '@mui/icons-material/GraphicEq';
 import { useNavigate } from 'react-router-dom';
+import { Assignment, Dashboard, ListAlt, Person } from '@mui/icons-material';
 
 
 const drawerWidth = 240;
@@ -120,7 +120,7 @@ export default function Navbar() {
             <MenuIcon />
           </IconButton>
           <Typography variant="h6" noWrap component="div">
-            Twitter Luminairies
+            Twitter Luminaries
           </Typography>
         </Toolbar>
       </AppBar>
@@ -147,9 +147,29 @@ export default function Navbar() {
                     justifyContent: 'center',
                   }}
                 >
-                  <GraphicEqIcon/>
+                  <Dashboard/>
                 </ListItemIcon>
                 <ListItemText primary={'Dashboard'} sx={{ opacity: open ? 1 : 0 }} />
+              </ListItemButton>
+            </ListItem>
+            <ListItem key={'ranks'} disablePadding sx={{ display: 'block' }} onClick={() => navigate('/ranks')}>
+              <ListItemButton
+                sx={{
+                  minHeight: 48,
+                  justifyContent: open ? 'initial' : 'center',
+                  px: 2.5,
+                }}
+              >
+                <ListItemIcon
+                  sx={{
+                    minWidth: 0,
+                    mr: open ? 3 : 'auto',
+                    justifyContent: 'center',
+                  }}
+                >
+                  <Person/>
+                </ListItemIcon>
+                <ListItemText primary={'Ranks'}  sx={{ opacity: open ? 1 : 0 }} />
               </ListItemButton>
             </ListItem>
             <ListItem key={'docs'} disablePadding sx={{ display: 'block' }} onClick={() => navigate('/documentation')}>
@@ -167,7 +187,7 @@ export default function Navbar() {
                     justifyContent: 'center',
                   }}
                 >
-                  <GraphicEqIcon/>
+                  <Assignment/>
                 </ListItemIcon>
                 <ListItemText primary={'Documentation'}  sx={{ opacity: open ? 1 : 0 }} />
               </ListItemButton>
@@ -187,7 +207,7 @@ export default function Navbar() {
                     justifyContent: 'center',
                   }}
                 >
-                  <GraphicEqIcon/>
+                  <ListAlt/>
                 </ListItemIcon>
                 <ListItemText primary={'Last Tweets'} sx={{ opacity: open ? 1 : 0 }} />
               </ListItemButton>

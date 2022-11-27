@@ -6,6 +6,7 @@ import Documentation from './Documentation';
 import { Route, Routes } from 'react-router';
 import Dashboard from './Dashboard';
 import LastTweets from './LastTweets';
+import Ranks from './Ranks';
 
 const DrawerHeader = styled('div')(({ theme }) => ({
     display: 'flex',
@@ -25,6 +26,7 @@ export default function App() {
                 <DrawerHeader />
                 <Routes>
                   <Route path="/" element={<Dashboard />} />
+                  <Route path="/ranks" element={<Ranks />} />
                   <Route path="/documentation" element={<Documentation/>} />
                   <Route path="/last-tweets" element={<LastTweets/>} />
                 </Routes>

@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import networkList from "./assets/network_connections.json";
 import list from './assets/list.json';
 import { getModColor, ModGroupsSelector } from "./State/ModularityGroups";
@@ -7,6 +7,7 @@ import { v4 as uuidv4 } from 'uuid';
 import { useRecoilValue, useSetRecoilState } from "recoil";
 import SelectedUser from "./State/SelectedUser";
 import Card from "@mui/material/Card/Card";
+import { Popper, Grow, Paper, ClickAwayListener, MenuList, MenuItem, Button } from "@mui/material";
 G6.registerNode(
     'bubble',
     {
@@ -326,7 +327,70 @@ const NetworkGraph: React.FC<{}> = () => {
     const setSelectedUser = useSetRecoilState(SelectedUser);
     const modGroups = useRecoilValue(ModGroupsSelector);
     //@ts-nocheck
-    const graph = useRef<IGraph>()
+    const graph = useRef<IGraph>();
+    const [sizeBy, setSizeBy] = useState<string>('tweets per day');
+    const [open, setOpen] = React.useState(false);
+    const anchorRef = React.useRef<HTMLButtonElement>(null);
+    const handleToggle = () => {
+      setOpen((prevOpen) => !prevOpen);
+    };
+  
+    const handleClose = (event: Event | React.SyntheticEvent) => {
+      if (
+        anchorRef.current &&
+        anchorRef.current.contains(event.target as HTMLElement)
+      ) {
+        return;
+      }
+  
+      setOpen(false);
+    };
+  
+    function handleListKeyDown(event: React.KeyboardEvent) {
+      if (event.key === 'Tab') {
+        event.preventDefault();
+        setOpen(false);
+      } else if (event.key === 'Escape') {
+        setOpen(false);
+      }
+    }
+
+    const [groupBy, setGroupBy] = useState<string>('luminaries group number');
+    const [open2, setOpen2] = React.useState(false);
+    const anchorRef2 = React.useRef<HTMLButtonElement>(null);
+    const handleToggle2 = () => {
+      setOpen2((prevOpen) => !prevOpen);
+    };
+  
+    const handleClose2 = (event: Event | React.SyntheticEvent) => {
+      if (
+        anchorRef2.current &&
+        anchorRef2.current.contains(event.target as HTMLElement)
+      ) {
+        return;
+      }
+  
+      setOpen2(false);
+    };
+  
+    function handleListKeyDown2(event: React.KeyboardEvent) {
+      if (event.key === 'Tab') {
+        event.preventDefault();
+        setOpen2(false);
+      } else if (event.key === 'Escape') {
+        setOpen2(false);
+      }
+    }
+  
+    // return focus to the button when we transitioned from !open -> open
+    const prevOpen = React.useRef(open);
+    React.useEffect(() => {
+      if (prevOpen.current === true && open === false) {
+        anchorRef.current!.focus();
+      }
+  
+      prevOpen.current = open;
+    }, [open]);
 
     useEffect(() => {
         const container = document.getElementById('network-graph');
@@ -336,14 +400,21 @@ const NetworkGraph: React.FC<{}> = () => {
                 edges: []
             }
             list.forEach(function (l) {
+                //@ts-ignore
+                let hi = parseInt((l[sizeBy] as string).toString().replace(/,/g, ''), 10);
+                if (isNaN(hi)) {
+                  hi = 0
+                }
                 const color = getModColor(l["luminaries group number"]);
                 if (modGroups.includes(l["luminaries group number"])) {
                     data.nodes.push({
                         id: l["handle"],
                         name: l["user name"], 
-                        cluster_id: l["luminaries group number"],
+                        //@ts-ignore
+                        cluster_id: l[groupBy],
                         color,
-                        size: l["followers"]
+                        //@ts-ignore
+                        size: hi,
                     });
                 }
             });
@@ -385,13 +456,17 @@ const NetworkGraph: React.FC<{}> = () => {
                 },
             });
 
+            const vals = data.nodes.map((n:any)=>n.size);
+            const max = Math.max(...vals);
+            const min = Math.min(...vals);
+
             data.nodes.forEach((i:any) => {
                 try {
                     i.cluster = i.cluster_id;
                     i.style = Object.assign(i.style || {}, {
                         fill: i.color,
                     });
-                    i.size = Math.sqrt(i.size);
+                    i.size = ((i.size - min) / (max - min)) * 100;
                 } catch (e) {
                     console.log(e)
                 }
@@ -712,9 +787,103 @@ const NetworkGraph: React.FC<{}> = () => {
             graph.current.destroy()
         }
     //@ts-nocheck @ts-ignore
-    },[modGroups,setSelectedUser]);
+    },[modGroups,setSelectedUser, sizeBy, groupBy]);
 
-    return <Card><div id="network-graph" style={{width: '100%', height: 450}}></div></Card>
+    return <Card>
+      <Button
+        style={{ margin: 5 }}
+        size="small"
+        variant="outlined"
+          ref={anchorRef}
+          id="composition-button"
+          aria-controls={open ? 'composition-menu' : undefined}
+          aria-expanded={open ? 'true' : undefined}
+          aria-haspopup="true"
+          onClick={handleToggle}
+        >
+          Size by {sizeBy}
+      </Button>
+      <Popper
+          open={open}
+          anchorEl={anchorRef.current}
+          role={undefined}
+          placement="bottom-start"
+          transition
+          disablePortal
+        >
+          {({ TransitionProps, placement }) => (
+            <Grow
+              {...TransitionProps}
+              style={{
+                transformOrigin:
+                  placement === 'bottom-start' ? 'left top' : 'left bottom',
+              }}
+            >
+              <Paper>
+                <ClickAwayListener onClickAway={handleClose}>
+                  <MenuList
+                    autoFocusItem={open}
+                    id="composition-menu"
+                    aria-labelledby="composition-button"
+                    onKeyDown={handleListKeyDown}
+                  >
+                    <MenuItem onClick={(e)=>{handleClose(e);setSizeBy('tweets per day');}}>Tweets Per Day</MenuItem>
+                    <MenuItem onClick={(e)=>{handleClose(e);setSizeBy('followers');}}>Followers</MenuItem>
+                    <MenuItem onClick={(e)=>{handleClose(e);setSizeBy('followers from focus group');}}>Followers from Focus Group</MenuItem>
+                    <MenuItem onClick={(e)=>{handleClose(e);setSizeBy('favorites');}}>Favorites</MenuItem>
+                  </MenuList>
+                </ClickAwayListener>
+              </Paper>
+            </Grow>
+          )}
+        </Popper>
+        <Button
+        style={{ margin: 5 }}
+        size="small"
+        variant="outlined"
+          ref={anchorRef2}
+          id="composition-button"
+          aria-controls={open ? 'composition-menu' : undefined}
+          aria-expanded={open ? 'true' : undefined}
+          aria-haspopup="true"
+          onClick={handleToggle2}
+        >
+          Group by {groupBy}
+      </Button>
+      <Popper
+          open={open2}
+          anchorEl={anchorRef2.current}
+          role={undefined}
+          placement="bottom-start"
+          transition
+          disablePortal
+        >
+          {({ TransitionProps, placement }) => (
+            <Grow
+              {...TransitionProps}
+              style={{
+                transformOrigin:
+                  placement === 'bottom-start' ? 'left top' : 'left bottom',
+              }}
+            >
+              <Paper>
+                <ClickAwayListener onClickAway={handleClose2}>
+                  <MenuList
+                    autoFocusItem={open}
+                    id="composition-menu"
+                    aria-labelledby="composition-button"
+                    onKeyDown={handleListKeyDown2}
+                  >
+                    <MenuItem onClick={(e)=>{handleClose2(e);setGroupBy('luminaries group number');}}>Luminaries Group Number</MenuItem>
+                    <MenuItem onClick={(e)=>{handleClose2(e);setGroupBy('client');}}>Client</MenuItem>
+                  </MenuList>
+                </ClickAwayListener>
+              </Paper>
+            </Grow>
+          )}
+        </Popper>
+      <div id="network-graph" style={{width: '100%', height: 450}}></div>
+    </Card>
 };
 
 export default NetworkGraph;
