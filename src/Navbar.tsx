@@ -132,7 +132,7 @@ export default function Navbar() {
         </DrawerHeader>
         <Divider />
         <List>
-            <ListItem key={'home'} disablePadding sx={{ display: 'block' }}  onClick={() => navigate('/')} >
+            <ListItem selected={window.location.pathname === '/'} key={'home'} disablePadding sx={{ display: 'block' }}  onClick={() => navigate('/')} >
               <ListItemButton
                 sx={{
                   minHeight: 48,
@@ -152,7 +152,7 @@ export default function Navbar() {
                 <ListItemText primary={'Dashboard'} sx={{ opacity: open ? 1 : 0 }} />
               </ListItemButton>
             </ListItem>
-            <ListItem key={'ranks'} disablePadding sx={{ display: 'block' }} onClick={() => navigate('/ranks')}>
+            <ListItem selected={window.location.pathname === '/ranks'} key={'ranks'} disablePadding sx={{ display: 'block' }} onClick={() => navigate('/ranks')}>
               <ListItemButton
                 sx={{
                   minHeight: 48,
@@ -172,7 +172,7 @@ export default function Navbar() {
                 <ListItemText primary={'Ranks'}  sx={{ opacity: open ? 1 : 0 }} />
               </ListItemButton>
             </ListItem>
-            <ListItem key={'docs'} disablePadding sx={{ display: 'block' }} onClick={() => navigate('/documentation')}>
+            <ListItem selected={window.location.pathname === '/documentation'} key={'docs'} disablePadding sx={{ display: 'block' }} onClick={() => navigate('/documentation')}>
               <ListItemButton
                 sx={{
                   minHeight: 48,
@@ -192,7 +192,7 @@ export default function Navbar() {
                 <ListItemText primary={'Documentation'}  sx={{ opacity: open ? 1 : 0 }} />
               </ListItemButton>
             </ListItem>
-            <ListItem key={'last-tweets'} disablePadding sx={{ display: 'block' }} onClick={() => navigate('/last-tweets')}>
+            <ListItem selected={window.location.pathname === '/last-tweets'} key={'last-tweets'} disablePadding sx={{ display: 'block' }} onClick={() => navigate('/last-tweets')}>
               <ListItemButton
                 sx={{
                   minHeight: 48,
