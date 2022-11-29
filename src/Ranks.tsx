@@ -1,10 +1,23 @@
-import { List, ListItem, ListItemAvatar, Avatar, ListItemText, Typography, Divider, Button, ClickAwayListener, Grow, MenuItem, MenuList, Paper, Popper } from '@mui/material';
+import { List, ListItemAvatar, Avatar, ListItemText, Typography, Divider, Button, ClickAwayListener, Grow, MenuItem, MenuList, Paper, Popper, ListItemButton, Grid } from '@mui/material';
 import React, { useEffect, useState } from 'react';
-import { useRecoilValue } from 'recoil';
+import { useRecoilValue, useSetRecoilState } from 'recoil';
 import ModularitySelect from './ModularitySelect';
+import SelectedUserInfo from './SelectedUserInfo';
 import { getModColor, ModGroupUsers } from './State/ModularityGroups';
+import SelectedUser from './State/SelectedUser';
 
 const Ranks = () => {
+  const [selectedIndex, setSelectedIndex] = React.useState('');
+  const setSelectedUser = useSetRecoilState(SelectedUser);
+
+  const handleListItemClick = (
+    event: React.MouseEvent<HTMLDivElement, MouseEvent>,
+    index: string,
+  ) => {
+    setSelectedIndex(index);
+    setSelectedUser(index);
+  };
+
     const modGroupUsers = useRecoilValue(ModGroupUsers);
     const [ list, setList ] = useState(modGroupUsers);
     const [ field, setField ] = useState('tweets');
@@ -45,8 +58,10 @@ const Ranks = () => {
     },[modGroupUsers, field]);
     
     return <>
-    <ModularitySelect/>
-    <Button
+    <Grid container spacing={2}>
+            <Grid item xs={12} spacing={2}>
+                <ModularitySelect/>
+                <Button
         style={{ margin: 5 }}
         size="small"
         variant="outlined"
@@ -93,35 +108,47 @@ const Ranks = () => {
             </Grow>
           )}
         </Popper>
-        <List sx={{ width: '100%', maxWidth: 360, bgcolor: 'background.paper' }}>
-            {list.map(l => <><ListItem alignItems="flex-start">
-            <ListItemAvatar>
-                <Avatar 
-                    alt={l["user name"]}
-                    sx={{ bgcolor: getModColor(l["luminaries group number"]) }}
+            </Grid>
+            <Grid item xs={3} spacing={2}>
+              <List sx={{ width: '100%', maxWidth: 360, bgcolor: 'background.paper' }}>
+                {list.map(l => <>
+                <ListItemButton 
+                  alignItems="flex-start"
+                  selected={selectedIndex === l["handle"]}
+                  onClick={(event) => handleListItemClick(event, l["handle"])}
                 >
-                    {l["user name"][0]}
-                </Avatar>
-            </ListItemAvatar>
-            <ListItemText
-                primary={l["user name"]}
-                secondary={
-                <React.Fragment>
-                    <Typography
-                        sx={{ display: 'inline' }}
-                        component="span"
-                        variant="body2"
-                        color="text.primary"
-                        >
-                        {l["user bio"]}
-                    </Typography>
-                </React.Fragment>
-                }
-            />
-            </ListItem>
-            <Divider variant="inset" component="li" />
-            </>)}
-        </List>
+                  <ListItemAvatar>
+                      <Avatar 
+                          alt={l["user name"]}
+                          sx={{ bgcolor: getModColor(l["luminaries group number"]) }}
+                      >
+                          {l["user name"][0]}
+                      </Avatar>
+                  </ListItemAvatar>
+                  <ListItemText
+                      primary={l["user name"]}
+                      secondary={
+                      <React.Fragment>
+                          <Typography
+                              sx={{ display: 'inline' }}
+                              component="span"
+                              variant="body2"
+                              color="text.primary"
+                              >
+                          </Typography>
+                      </React.Fragment>
+                      }
+                  />
+                </ListItemButton>
+                <Divider variant="inset" component="li" />
+                </>)}
+            </List>
+            </Grid>
+            <Grid item xs={9} spacing={2}>
+                <SelectedUserInfo/>
+            </Grid>
+        </Grid>
+    
     </>
 }
 

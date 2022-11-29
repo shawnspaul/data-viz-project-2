@@ -31,7 +31,7 @@ export const ModGroups: ModGroup[] = [
     {
         id: 4,
         color: "#ca472e",
-        title: 'Health & Wellness',
+        title: 'Health and Wellness',
         anchor_words: ['2022', 'patient', 'read', 'key', 'latest', 'disease', 'virtual', 'post', 'heart', 'blog', 'changing', 'prices', 'rare', 'feeling']
     },
     {
