@@ -51,16 +51,16 @@ export const getModColor = (modGroup: number) => {
     return "#000000";
 }
 
-const ModularityGroup = atom<ModGroup[]>({
+const ModularityGroup = atom<number[]>({
     key: 'modGroup',
-    default: ModGroups
+    default: ModGroups.map((mg) => mg.id)
 });
 
 export const ModGroupsSelector = selector({
     key: 'modGroupSelector',
     get: ({get}) => {
         const groups = get(ModularityGroup);
-        return groups.map((g) => g.id);
+        return groups.map((g) => g);
     }
 });
 
@@ -68,7 +68,7 @@ export const ModGroupUsers = selector({
     key: 'modGroupUsers',
     get: ({get}) => {
         const groups = get(ModularityGroup);
-        const groupList = groups.map((g) => g.id);
+        const groupList = groups.map((g) => g);
         const users = [];
         for (let user of list) {
             if (groupList.includes(user['luminaries group number'])) {

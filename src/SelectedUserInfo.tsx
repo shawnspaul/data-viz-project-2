@@ -91,7 +91,7 @@ const SelectedUserInfo = () => {
             </Stack>
         </>
     }
-    return <></>
+    return <Typography component="div" key={'h1'} variant={'h5'}>No user selected</Typography>
 }
 
 export default SelectedUserInfo;

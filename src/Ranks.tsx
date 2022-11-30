@@ -50,30 +50,17 @@ const Ranks = () => {
     useEffect(() => {
         let me: any = []; 
         Object.assign(me,modGroupUsers);
-        const lol = me.sort((a:any,b:any) => 
+        me.sort((a:any,b:any) => 
             //@ts-ignore
-            (a[field] > b[field]) ? 1 : -1
+            (parseInt((a[field] as string).toString().replace(/,/g, ''), 10) < parseInt((b[field] as string).toString().replace(/,/g, ''), 10)) ? 1 : -1
         );
-        setList(lol)
+        setList(me)
     },[modGroupUsers, field]);
     
     return <>
     <Grid container spacing={2}>
             <Grid item xs={12} spacing={2}>
                 <ModularitySelect/>
-                <Button
-        style={{ margin: 5 }}
-        size="small"
-        variant="outlined"
-          ref={anchorRef}
-          id="composition-button"
-          aria-controls={open ? 'composition-menu' : undefined}
-          aria-expanded={open ? 'true' : undefined}
-          aria-haspopup="true"
-          onClick={handleToggle}
-        >
-          Rank by {field}
-      </Button>
       <Popper
           open={open}
           anchorEl={anchorRef.current}
@@ -109,42 +96,60 @@ const Ranks = () => {
           )}
         </Popper>
             </Grid>
-            <Grid item xs={3} spacing={2}>
+            <Grid item xs={3} spacing={2} style={{ height: '85vh', overflowY: "scroll"}}>
+            <Button
+        style={{ margin: 5 }}
+        size="small"
+        variant="outlined"
+          ref={anchorRef}
+          id="composition-button"
+          aria-controls={open ? 'composition-menu' : undefined}
+          aria-expanded={open ? 'true' : undefined}
+          aria-haspopup="true"
+          onClick={handleToggle}
+        >
+          Rank by {field}
+      </Button>
               <List sx={{ width: '100%', maxWidth: 360, bgcolor: 'background.paper' }}>
-                {list.map(l => <>
-                <ListItemButton 
-                  alignItems="flex-start"
-                  selected={selectedIndex === l["handle"]}
-                  onClick={(event) => handleListItemClick(event, l["handle"])}
-                >
-                  <ListItemAvatar>
-                      <Avatar 
-                          alt={l["user name"]}
-                          sx={{ bgcolor: getModColor(l["luminaries group number"]) }}
-                      >
-                          {l["user name"][0]}
-                      </Avatar>
-                  </ListItemAvatar>
-                  <ListItemText
-                      primary={l["user name"]}
-                      secondary={
-                      <React.Fragment>
-                          <Typography
+                {list.map((l) => <>
+                  <ListItemButton 
+                    alignItems="flex-start"
+                    selected={selectedIndex === l["handle"]}
+                    onClick={(event) => handleListItemClick(event, l["handle"])}
+                  >
+                    <ListItemAvatar>
+                        <Avatar 
+                            alt={l["user name"]}
+                            sx={{ bgcolor: getModColor(l["luminaries group number"]) }}
+                        >
+                            {l["user name"][0]}
+                        </Avatar>
+                    </ListItemAvatar>
+                    <ListItemText
+                        primary={l["user name"]}
+                        secondary={
+                        <React.Fragment>
+                            <Typography
                               sx={{ display: 'inline' }}
                               component="span"
                               variant="body2"
                               color="text.primary"
-                              >
-                          </Typography>
-                      </React.Fragment>
-                      }
-                  />
-                </ListItemButton>
-                <Divider variant="inset" component="li" />
-                </>)}
+                            >
+                              {
+                                //@ts-ignore
+                                l[field] + " " + field
+                              }
+                            </Typography>
+                        </React.Fragment>
+                        }
+                    />
+                  </ListItemButton>
+                  <Divider variant="inset" component="li" />
+                  </>)
+                }
             </List>
             </Grid>
-            <Grid item xs={9} spacing={2}>
+            <Grid item xs={9} spacing={2} style={{ height: '85vh', overflowY: "scroll"}}>
                 <SelectedUserInfo/>
             </Grid>
         </Grid>

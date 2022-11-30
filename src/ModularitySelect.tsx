@@ -1,35 +1,47 @@
 import * as React from 'react';
 import { useRecoilState } from 'recoil';
 import ModularityGroup, { ModGroup, ModGroups } from './State/ModularityGroups';
-import { ToggleButton, ToggleButtonGroup } from '@mui/material';
-import FiberManualRecordIcon from '@mui/icons-material/FiberManualRecord';
+import { Checkbox, FormControl, FormControlLabel, FormGroup } from '@mui/material';
 
 const ModularitySelect = () => {
     const [ modGroups, setModGroups ] = useRecoilState(ModularityGroup);
 
   const onChange = (
-    _: React.MouseEvent<HTMLElement>,
-    gs: ModGroup[],
+    event: React.ChangeEvent<HTMLInputElement>, checked: boolean
   ) => {
-    setModGroups(gs);
+    let mg = Object.assign([],modGroups);
+    if (checked) {
+      mg.push(parseInt(event.target.value) as any)
+    } else {
+      const index = mg.findIndex((m) => m === parseInt(event.target.value) as any);
+      if (index > -1) {
+        mg.splice(index, index + 1);
+      }
+    }
+    setModGroups(mg);
   };
     const buttons = ModGroups.map(mg => 
-        <ToggleButton value={mg}>
-            <FiberManualRecordIcon style={{ color: mg.color}} />{mg.title}
-        </ToggleButton>
+            <FormControlLabel
+              control={
+                <Checkbox 
+                  checked={modGroups.includes(mg.id)} 
+                  style={{color: mg.color}}
+                  value={mg.id}
+                  size="small"
+                  onChange={onChange}
+                />
+              }
+              label={mg.title}
+            />
     );
 
     return (
-        <ToggleButtonGroup
-            orientation="horizontal"
-            value={modGroups}
-            onChange={onChange}
-            size="small"
-            aria-label="text alignment"
-        >
+      <FormControl sx={{ m: 3 }} component="fieldset" variant="filled">
+          <FormGroup row>
             {buttons}
-        </ToggleButtonGroup>
-    );
+          </FormGroup>
+        </FormControl>
+    )
 }
 
 export default ModularitySelect;
