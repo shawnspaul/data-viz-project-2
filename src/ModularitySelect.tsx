@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { useRecoilState } from 'recoil';
-import ModularityGroup, { ModGroup, ModGroups } from './State/ModularityGroups';
+import ModularityGroup, { ModGroups } from './State/ModularityGroups';
 import { Checkbox, FormControl, FormControlLabel, FormGroup } from '@mui/material';
 
 const ModularitySelect = () => {

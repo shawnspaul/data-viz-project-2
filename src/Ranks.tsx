@@ -68,6 +68,7 @@ const Ranks = () => {
           placement="bottom-start"
           transition
           disablePortal
+          style={{ position: 'relative', zIndex: 100 }}
         >
           {({ TransitionProps, placement }) => (
             <Grow
