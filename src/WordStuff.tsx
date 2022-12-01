@@ -26,16 +26,18 @@ const WordStuff = () => {
     useEffect(() => {
         setTweets(() => tweet_list.filter(t => t.topic_num === parseInt(topic as any) as any) as any);
         //@ts-ignore
-        setTopicInfo(topics.find(t => t['Topic Number'] === topic));
+        setTopicInfo(topics.find(t => t['Topic Number'] === parseInt(topic)));
     },[topic]);
 
     useEffect(() => {
-        setAnchorWords(topicInfo["Topic Label"].split("_"));
-        try {
-            const replaced = topicInfo["Top Hashtags"].replaceAll(`'`, `"`);
-            setHashTags(JSON.parse(replaced));
-        } catch (e) {
-            console.log(e)
+        if (topicInfo) { 
+            setAnchorWords(topicInfo["Topic Label"].split("_"));
+            try {
+                const replaced = topicInfo["Top Hashtags"].replaceAll(`'`, `"`);
+                setHashTags(JSON.parse(replaced));
+            } catch (e) {
+                console.log(e)
+            }
         }
     },[topicInfo]);
 
