@@ -39,16 +39,19 @@ const WordStuff = () => {
                 console.log(e)
             }
         }
+        // eslint-disable-next-line @typescript-eslint/ban-ts-comment 
     },[topicInfo]);
 
     useEffect(() => {
         const res = getLum(parseInt(topic as any), anchorWords);
         setAr(() => Object.entries(res).map(([k,v]) => ({ value: k, count: v.count})));
+        // eslint-disable-next-line @typescript-eslint/ban-ts-comment 
     },[anchorWords]);
 
     useEffect(() => {
         const res = getLum(parseInt(topic as any), hashTags);
         setHr(() => Object.entries(res).map(([k,v]) => ({ value: k, count: v.count})));
+        // eslint-disable-next-line @typescript-eslint/ban-ts-comment 
     },[hashTags]);
 
     return <>
