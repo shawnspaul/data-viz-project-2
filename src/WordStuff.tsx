@@ -26,7 +26,7 @@ const WordStuff = () => {
     useEffect(() => {
         setTweets(() => tweet_list.filter(t => t.topic_num === parseInt(topic as any) as any) as any);
         //@ts-ignore
-        setTopicInfo(topics.find(t => t['Topic Number'] == topic));
+        setTopicInfo(topics.find(t => t['Topic Number'] === topic));
     },[topic]);
 
     useEffect(() => {
@@ -42,12 +42,12 @@ const WordStuff = () => {
     useEffect(() => {
         const res = getLum(parseInt(topic as any), anchorWords);
         setAr(() => Object.entries(res).map(([k,v]) => ({ value: k, count: v.count})));
-    },[anchorWords]);
+    },[anchorWords,topic]);
 
     useEffect(() => {
         const res = getLum(parseInt(topic as any), hashTags);
         setHr(() => Object.entries(res).map(([k,v]) => ({ value: k, count: v.count})));
-    },[hashTags]);
+    },[hashTags,topic]);
 
     return <>
         <Grid container spacing={2}>
