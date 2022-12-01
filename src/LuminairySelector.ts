@@ -1,6 +1,7 @@
-import List from './assets/list.json';
+import List from './assets/new_raw_tweets.json';
+import users from './assets/list.json';
 
-type LumResults = {
+export type LumResults = {
     [x: string]: {
         count: number;
         percentage: number;
@@ -18,13 +19,13 @@ export const getLum = (group_id: number, keys: string[]) => {
                     percentage: 0
                 }
             }
-            if (listItem['last tweet text'].toLowerCase().includes(k.toLowerCase()) && listItem['modularity class'] === group_id) {
+            if (listItem['tweet_text'].toLowerCase().includes(k.toLowerCase()) && listItem['topic_num'] === group_id) {
                 results[k].count++;
             }
         });
     });
     
-    Object.entries(results).forEach(([k,v]) => {
+    Object.entries(results).forEach(([k,_]) => {
         results[k].percentage = results[k].count / numberOfTweets;
     });
 
@@ -32,10 +33,10 @@ export const getLum = (group_id: number, keys: string[]) => {
 }
 
 export const getProfileFromHandle = (handle: string) => {
-    for (let u of List) {
-        if (u.handle === handle) {
+    for (let u of users) {
+        if (u["handle"] === handle) {
             return u;
         }
     }
-    return List[0];
+    return users[0];
 }

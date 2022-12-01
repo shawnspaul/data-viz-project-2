@@ -13,6 +13,7 @@ const FocusGroupFollowers = (props: Props) => {
     {props.users.map((u) => {
         const profile = getProfileFromHandle(u); 
         return <Avatar 
+            //@ts-ignore
             sx={{ width: 30, height: 30, bgcolor: getModColor(profile["luminaries group number"]) }}
             alt={u}
             onClick={() => props.selectUser(u)}

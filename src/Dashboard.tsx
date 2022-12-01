@@ -15,7 +15,6 @@ const Dashboard = () => {
             </Grid>
             <Grid item xs={6} spacing={2}>
                 <TweetsLineGraph/>
-                {/* <WordCloud words={words}/> */}
             </Grid>
             <Grid item xs={6} spacing={2}>
                 <NetworkGraph/>

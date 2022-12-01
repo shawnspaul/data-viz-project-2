@@ -16,7 +16,7 @@ import ListItemButton from '@mui/material/ListItemButton';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import { useNavigate } from 'react-router-dom';
-import { Assignment, Dashboard, ListAlt, Person } from '@mui/icons-material';
+import { Assignment, Cloud, Dashboard, ListAlt, Person } from '@mui/icons-material';
 
 
 const drawerWidth = 240;
@@ -168,6 +168,26 @@ export default function Navbar() {
                   }}
                 >
                   <Person/>
+                </ListItemIcon>
+                <ListItemText primary={'Ranks'}  sx={{ opacity: open ? 1 : 0 }} />
+              </ListItemButton>
+            </ListItem>
+            <ListItem selected={window.location.pathname === '/wordcloud'} key={'wordcloud'} disablePadding sx={{ display: 'block' }} onClick={() => navigate('/wordcloud')}>
+              <ListItemButton
+                sx={{
+                  minHeight: 48,
+                  justifyContent: open ? 'initial' : 'center',
+                  px: 2.5,
+                }}
+              >
+                <ListItemIcon
+                  sx={{
+                    minWidth: 0,
+                    mr: open ? 3 : 'auto',
+                    justifyContent: 'center',
+                  }}
+                >
+                  <Cloud/>
                 </ListItemIcon>
                 <ListItemText primary={'Ranks'}  sx={{ opacity: open ? 1 : 0 }} />
               </ListItemButton>

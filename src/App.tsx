@@ -7,6 +7,7 @@ import { Route, Routes } from 'react-router';
 import Dashboard from './Dashboard';
 import LastTweets from './LastTweets';
 import Ranks from './Ranks';
+import WordStuff from './WordStuff';
 
 const DrawerHeader = styled('div')(({ theme }) => ({
     display: 'flex',
@@ -27,8 +28,10 @@ export default function App() {
                 <Routes>
                   <Route path="/" element={<Dashboard />} />
                   <Route path="/ranks" element={<Ranks />} />
+                  <Route path="/wordcloud/:topic" element={<WordStuff/>} />
                   <Route path="/documentation" element={<Documentation/>} />
                   <Route path="/last-tweets" element={<LastTweets/>} />
+                  
                 </Routes>
             </Box>
         </Box>
