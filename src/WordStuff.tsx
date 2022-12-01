@@ -20,7 +20,7 @@ const WordStuff = () => {
     const navigate = useNavigate();
 
     if (topic === '-1') {
-        navigate('/dashboard')
+        navigate('/dashboard');
     }
 
     useEffect(() => {
@@ -42,12 +42,12 @@ const WordStuff = () => {
     useEffect(() => {
         const res = getLum(parseInt(topic as any), anchorWords);
         setAr(() => Object.entries(res).map(([k,v]) => ({ value: k, count: v.count})));
-    },[anchorWords,topic]);
+    },[anchorWords]);
 
     useEffect(() => {
         const res = getLum(parseInt(topic as any), hashTags);
         setHr(() => Object.entries(res).map(([k,v]) => ({ value: k, count: v.count})));
-    },[hashTags,topic]);
+    },[hashTags]);
 
     return <>
         <Grid container spacing={2}>
