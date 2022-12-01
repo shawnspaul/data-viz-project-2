@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import WordCloud, { Word } from './WordCloud';
 import tweet_list from './assets/new_raw_tweets.json';
-import { Grid, Paper, Typography } from '@mui/material';
+import { Grid, MenuItem, Paper, Typography, Select } from '@mui/material';
 import topics from './assets/topics.json';
 import Table from './Table';
 import { getModColor } from './State/ModularityGroups';
@@ -54,7 +54,14 @@ const WordStuff = () => {
     return <>
         <Grid container spacing={2}>
             <Grid item xs={4}>
-                <Typography variant="h4">Topic {topic}</Typography>
+                <Typography variant="h5">Topic&nbsp;
+                    <Select 
+                        value={topic} 
+                        onChange={(e:any) => navigate(`/wordcloud/${e.target.value}`)}
+                    >
+                        {topics.map(t => <MenuItem value={t["Topic Number"]}>{t["Topic Number"]}</MenuItem>)}
+                    </Select>
+                </Typography>
             </Grid>
             <Grid item xs={4} spacing={2}>
                 Top Words
