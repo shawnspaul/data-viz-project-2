@@ -22,7 +22,7 @@ const DrawerHeader = styled('div')(({ theme }) => ({
 export default function App() {
     return (
         <Box sx={{ display: 'flex' }}>
-            <Navbar/>
+            <Navbar/><br>
             <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
                 <DrawerHeader />
                 <Routes>
@@ -31,7 +31,7 @@ export default function App() {
                   <Route path="/wordcloud/:topic" element={<WordStuff/>} />
                   <Route path="/documentation" element={<Documentation/>} />
                   <Route path="/last-tweets" element={<LastTweets/>} />
-                  
+
                 </Routes>
             </Box>
         </Box>
