@@ -2,12 +2,14 @@ import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import WordCloud, { Word } from './WordCloud';
 import tweet_list from './assets/new_raw_tweets.json';
-import { Grid, MenuItem, Paper, Typography, Select } from '@mui/material';
+import { Grid, MenuItem, Paper, Typography, Select, Button } from '@mui/material';
 import topics from './assets/topics.json';
 import Table from './Table';
 import { getModColor } from './State/ModularityGroups';
 import { getLum } from './LuminairySelector';
 import { useNavigate } from 'react-router-dom';
+import { useSetRecoilState } from 'recoil';
+import SelectedUser from './State/SelectedUser';
 
 const WordStuff = () => {
     const { topic } = useParams();
@@ -18,6 +20,7 @@ const WordStuff = () => {
     const [ ar, setAr ] = useState<Word[]>([]);
     const [ hr, setHr ] = useState<Word[]>([]);
     const navigate = useNavigate();
+    const setSelectedUser = useSetRecoilState(SelectedUser);
 
     if (topic === '-1') {
         navigate('/dashboard');
@@ -79,9 +82,14 @@ const WordStuff = () => {
                 </Paper>
             </Grid>
             <Grid item xs={12} spacing={2}>
+                Summary
+                <Paper>{topicInfo["Summary"]}</Paper>
+            </Grid>
+            <Grid item xs={12} spacing={2}>
                 <Table data={tweets.map(ut => ({
                     //@ts-ignore
                     "__color__": getModColor(ut["luminaries group number"]),
+                    "User": <Button onClick={() => { setSelectedUser(ut["screen_name"]); navigate('/ranks') }}>{ut["screen_name"]}</Button>,
                     "Date": ut.tweet_date,
                     "Luminary Group": ut['Luminary Group Name'],
                     "Tweet": ut.tweet_text,

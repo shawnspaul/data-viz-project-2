@@ -26,7 +26,7 @@ const UserTweets = (props: Props) => {
     return <Table data={userTweets.map(ut => ({
         //@ts-ignore
         "__color__": getModColor(ut["luminaries group number"]),
-        "": ut["topic_num"] > -1 ? <Button onClick={() => navigate(`/wordcloud/${ut["topic_num"]}`)}>Inspect</Button> : null,
+        "Topic": ut["topic_num"] > -1 ? <Button onClick={() => navigate(`/wordcloud/${ut["topic_num"]}`)}>Topic {ut["topic_num"]} Word Cloud</Button> : null,
         "Date": ut.tweet_date,
         "Luminary Group": ut['Luminary Group Name'],
         "Tweet": ut.tweet_text,
