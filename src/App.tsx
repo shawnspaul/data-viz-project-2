@@ -22,7 +22,7 @@ const DrawerHeader = styled('div')(({ theme }) => ({
 export default function App() {
     return (
         <Box sx={{ display: 'flex' }}>
-            <Navbar/><br>
+            <Navbar/><br/>
             <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
                 <DrawerHeader />
                 <Routes>

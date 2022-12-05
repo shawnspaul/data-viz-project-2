@@ -1,4 +1,4 @@
-import { 
+import {
     Grid,
 } from '@mui/material'
 import React from 'react'
@@ -14,14 +14,13 @@ const Dashboard = () => {
                 <ModularitySelect/>
             </Grid>
             <Grid item xs={6} spacing={2}>
+                <NetworkGraph/>
                 <TweetsLineGraph/>
             </Grid>
             <Grid item xs={6} spacing={2}>
-                <NetworkGraph/>
+              <SelectedUserInfo/>
             </Grid>
-            <Grid item xs={12} spacing={2}>
-                <SelectedUserInfo/>
-            </Grid>
+
         </Grid>
     );
 }

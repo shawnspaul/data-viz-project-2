@@ -11,12 +11,18 @@ type Props = {
 }
 
 const WordCloud = (props: Props) => {
+    const options = {
+        luminosity: 'light',
+        hue: 'green',
+      }
     return <TagCloud
         minSize={12}
         maxSize={35}
         tags={props.words}
-        disableRandomColor
+        colorOptions={options}
+        // disableRandomColor
     />;
 }
+
 
 export default WordCloud

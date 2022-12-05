@@ -33,7 +33,7 @@ const WordStuff = () => {
     },[topic]);
 
     useEffect(() => {
-        if (topicInfo) { 
+        if (topicInfo) {
             setAnchorWords(topicInfo["Topic Label"].split("_"));
             try {
                 const replaced = topicInfo["Top Hashtags"].replaceAll(`'`, `"`);
@@ -59,10 +59,10 @@ const WordStuff = () => {
 
     return <>
         <Grid container spacing={2}>
-            <Grid item xs={4}>
+            <Grid item xs={2}>
                 <Typography variant="h5">Topic&nbsp;
-                    <Select 
-                        value={topic} 
+                    <Select
+                        value={topic}
                         onChange={(e:any) => navigate(`/wordcloud/${e.target.value}`)}
                     >
                         {topics.map(t => <MenuItem value={t["Topic Number"]}>{t["Topic Number"]}</MenuItem>)}
