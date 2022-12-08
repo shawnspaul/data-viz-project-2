@@ -5,7 +5,7 @@ import Navbar from './Navbar';
 import Documentation from './Documentation';
 import { Route, Routes } from 'react-router';
 import Dashboard from './Dashboard';
-import LastTweets from './LastTweets';
+import DataFiles from './DataFiles';
 import Ranks from './Ranks';
 import WordStuff from './WordStuff';
 
@@ -30,8 +30,7 @@ export default function App() {
                   <Route path="/ranks" element={<Ranks />} />
                   <Route path="/wordcloud/:topic" element={<WordStuff/>} />
                   <Route path="/documentation" element={<Documentation/>} />
-                  <Route path="/last-tweets" element={<LastTweets/>} />
-
+                  <Route path="/data" element={<DataFiles/>} />
                 </Routes>
             </Box>
         </Box>

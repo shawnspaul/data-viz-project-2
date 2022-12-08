@@ -212,7 +212,7 @@ export default function Navbar() {
                 <ListItemText primary={'Documentation'}  sx={{ opacity: open ? 1 : 0 }} />
               </ListItemButton>
             </ListItem>
-            <ListItem selected={window.location.pathname === '/last-tweets'} key={'last-tweets'} disablePadding sx={{ display: 'block' }} onClick={() => navigate('/last-tweets')}>
+            <ListItem selected={window.location.pathname === '/data'} key={'data'} disablePadding sx={{ display: 'block' }} onClick={() => navigate('/data')}>
               <ListItemButton
                 sx={{
                   minHeight: 48,
@@ -229,7 +229,7 @@ export default function Navbar() {
                 >
                   <ListAlt/>
                 </ListItemIcon>
-                <ListItemText primary={'Last Tweets'} sx={{ opacity: open ? 1 : 0 }} />
+                <ListItemText primary={'Data'} sx={{ opacity: open ? 1 : 0 }} />
               </ListItemButton>
             </ListItem>
         </List>
