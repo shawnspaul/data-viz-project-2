@@ -22,14 +22,20 @@ const WordStuff = () => {
     const navigate = useNavigate();
     const setSelectedUser = useSetRecoilState(SelectedUser);
 
-    if (topic === '-1') {
-        navigate('/dashboard');
-    }
-
     useEffect(() => {
-        setTweets(() => tweet_list.filter(t => t.topic_num === parseInt(topic as any) as any) as any);
+        const found = tweet_list.filter(t => t.topic_num === parseInt(topic as any));
+        if (found.length > 0) {
+            setTweets(found);
+        } else {
+            navigate('/dashboard');
+        }
         //@ts-ignore
-        setTopicInfo(topics.find(t => t['Topic Number'] === parseInt(topic)));
+        const next_found = topics.find(t => t['Topic Number'] === parseInt(topic));
+        if (next_found) {
+            setTopicInfo(next_found);
+        } else {
+            navigate('/dashboard');
+        }
     },[topic]);
 
     useEffect(() => {

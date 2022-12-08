@@ -172,7 +172,7 @@ export default function Navbar() {
                 <ListItemText primary={'Ranks'}  sx={{ opacity: open ? 1 : 0 }} />
               </ListItemButton>
             </ListItem>
-            <ListItem selected={window.location.pathname === '/wordcloud/1'} key={'wordcloud'} disablePadding sx={{ display: 'block' }} onClick={() => navigate('/wordcloud')}>
+            <ListItem selected={window.location.pathname.split('/')[0] === 'wordcloud'} key={'wordcloud/0'} disablePadding sx={{ display: 'block' }} onClick={() => navigate('/wordcloud/0')}>
               <ListItemButton
                 sx={{
                   minHeight: 48,
