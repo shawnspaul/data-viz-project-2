@@ -36,7 +36,7 @@ const WordStuff = () => {
         } else {
             navigate('/dashboard');
         }
-    },[topic]);
+    },[topic,navigate]);
 
     useEffect(() => {
         if (topicInfo) {
