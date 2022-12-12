@@ -268,6 +268,7 @@ G6.registerNode(
     'animate-line',
     {
       drawShape(cfg, group) {
+        //@ts-ignore
         const self = this;
         let shapeStyle = self.getShapeStyle(cfg);
         shapeStyle = Object.assign(shapeStyle, {
@@ -334,6 +335,23 @@ const NetworkGraph: React.FC<{}> = () => {
     const handleToggle = () => {
       setOpen((prevOpen) => !prevOpen);
     };
+
+    const showTooltip = (x: number, y: number, name: string) => {
+      const lol = document.getElementById('network-tooltip');
+      if (lol) {
+        lol.innerHTML = name;
+        lol.style.display = 'block';
+        lol.style.top = y.toString() + 'px';
+        lol.style.left = x.toString() + 'px';
+      }
+    }
+    const hideTooltip = () => {
+      const lol = document.getElementById('network-tooltip');
+      if (lol) {
+        lol.innerHTML = '';
+        lol.style.display = 'none';
+      }
+    }
   
     const handleClose = (event: Event | React.SyntheticEvent) => {
       if (
@@ -477,6 +495,7 @@ const NetworkGraph: React.FC<{}> = () => {
             graph.current.render();
 
             graph.current.on('node:mouseleave', (e) => {
+              hideTooltip();
                 //@ts-ignore
                 const nodeItems = graph.current.getNodes();
                 //@ts-ignore
@@ -506,6 +525,8 @@ const NetworkGraph: React.FC<{}> = () => {
             graph.current.on('node:mouseenter', (e) => {
                 const item = e.item;
                 const model = item?.getModel();
+                //@ts-ignore
+                showTooltip(e.clientX,e.clientY, model?.name)
                 // highlighting = true;
                 //@ts-ignore
                 graph.current.setAutoPaint(false);
@@ -557,7 +578,9 @@ const NetworkGraph: React.FC<{}> = () => {
                 setSelectedUser(model?.id as string)
                     // if clicked a root, hide unrelated items and show the related items
                     //@ts-ignore
-                    if (model.level === 0) {
+                    model.style.fill = "#fff"
+                    //@ts-ignore
+                  if (model.level === 0) {
                         //@ts-ignore
                     const layoutController = graph.current.get('layoutController');
                     const forceLayout = layoutController.layoutMethods[0];
@@ -883,6 +906,16 @@ const NetworkGraph: React.FC<{}> = () => {
           )}
         </Popper>
       <div id="network-graph" style={{width: '100%', height: 450}}></div>
+      <div id="network-tooltip" style={{
+         height: 40,
+         padding: 5,
+         width: 200,
+         background: "black",
+         borderRadius: 5,
+         display: 'none',
+         position: 'absolute',
+         zIndex: 1000,
+      }}></div>
     </Card>
 };
 
