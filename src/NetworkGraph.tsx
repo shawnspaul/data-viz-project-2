@@ -578,8 +578,6 @@ const NetworkGraph: React.FC<{}> = () => {
                 setSelectedUser(model?.id as string)
                     // if clicked a root, hide unrelated items and show the related items
                     //@ts-ignore
-                    model.style.fill = "#fff"
-                    //@ts-ignore
                   if (model.level === 0) {
                         //@ts-ignore
                     const layoutController = graph.current.get('layoutController');
