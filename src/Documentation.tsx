@@ -74,7 +74,7 @@ In order to investigate this question we can look at the Emergency Medicine modu
 There does seem to be some correlation between follower count and tweets per day. As you can see, Emergency Medicine has the lowest size representing followers and also has little to no activity when looking at tweets per day. The same can not be said for the rest of the industries. Each one has a noticeable tweets per day to circle size association with Technology and Media & Marketing being the highest in both graphical representations.
             </Typography>
             <Box sx={{mb: 5}}></Box>
-            <img src={logo} />{"\n"}
+            <img src={logo} alt="logo" />{"\n"}
             <Box sx={{mb: 5}}></Box>
             <Typography variant="body1" gutterBottom>
 It also seems network position has an impact on disrupting data. Media & marketing are an example of this due to the fact most of the largest accounts are found in this category when it comes to tweets per day.      
@@ -82,7 +82,7 @@ It also seems network position has an impact on disrupting data. Media & marketi
             </Typography>
             <Box sx={{mb: 5}}></Box>
 
-            <img src={logo1} />{"\n"}
+            <img src={logo1} alt="logo"/>{"\n"}
             <Box sx={{mb: 5}}></Box>
             <Box sx={{ fontWeight: 'bold',mb: 2 }}>How do the top Tele-Health companies advertise themselves in user bios? What improvements can be made to lesser companies/interest groups to have the same effect on their media presence?</Box> 
             
