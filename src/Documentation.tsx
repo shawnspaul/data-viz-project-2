@@ -2,6 +2,8 @@ import { Box, Typography } from '@mui/material';
 import * as React from 'react';
 import logo from './Picture1.png';
 import logo1 from './Picture2.png';
+import YouTube from 'react-youtube';
+
 
 const Documentation = () => {
 
@@ -14,10 +16,14 @@ const Documentation = () => {
             <Box sx={{fontWeight: 'bold'}}>
             Topic Detection & Analysis of Twitter Data using an Imposed Network Structure
             </Box>
+
             </Typography>
             <Typography variant="h6" gutterBottom>
-            <Box sx={{mb: 7}}> The Network Structure implicitly defines our focus group (Tele-Critical Care) which has been tailored to be representative of the public discourse surrounding the broadly defined topic. </Box>
+            <Box sx={{mb: 2}}> The Network Structure implicitly defines our focus group (Tele-Critical Care) which has been tailored to be representative of the public discourse surrounding the broadly defined topic. </Box>
             </Typography>
+
+            
+
             <Typography variant="h5" gutterBottom>
             Project Context & Scope:
             </Typography>
@@ -149,11 +155,13 @@ Joel-Cedric - Analyzing data to discover interesting results and responding to d
 </Typography>
 
 
+<Typography variant="body1" gutterBottom>
+<Box sx={{fontWeight: 'bold', mt:3,mb: 3}}>Youtube video: </Box><YouTube videoId="I9pvGFvrAGs"/>
+         
+            </Typography>
 
 
 
-
-           
 
 
 
