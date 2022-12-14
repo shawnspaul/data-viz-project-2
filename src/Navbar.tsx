@@ -189,7 +189,7 @@ export default function Navbar() {
                 >
                   <Cloud/>
                 </ListItemIcon>
-                <ListItemText primary={'Ranks'}  sx={{ opacity: open ? 1 : 0 }} />
+                <ListItemText primary={'Word Cloud'}  sx={{ opacity: open ? 1 : 0 }} />
               </ListItemButton>
             </ListItem>
             <ListItem selected={window.location.pathname === '/documentation'} key={'docs'} disablePadding sx={{ display: 'block' }} onClick={() => navigate('/documentation')}>

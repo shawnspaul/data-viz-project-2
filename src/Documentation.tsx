@@ -136,13 +136,16 @@ The most important aspect of this mechanism would be in how the user revisits th
 Contributions:
 </Box>
 <Typography variant="body1" gutterBottom>
-Chika- Assembling team and meetings,Giving assignments, Analyzing data and answering document questions.
+Chika - Assembling team and meetings,Giving assignments, Analyzing data and answering document questions.
 </Typography>
 <Typography variant="body1" gutterBottom>
-Shawn- Lead development of website, contributed to data analysis and data structuring for the project.
+Shawn - Lead development of website, contributed to data analysis and data structuring for the project.
 </Typography>
 <Typography variant="body1" gutterBottom>
-Joel-Cedric- Answering documentation questions and analyzing data to find interesting findings.
+Joel Brauchla - Provided data and communicated its context and purpose to the design team. Contributed to data analysis and documentation as well as the design choice.
+</Typography>
+<Typography variant="body1" gutterBottom>
+Joel-Cedric - Analyzing data to discover interesting results and responding to documentation questions. Assist with simple page like the documentation page
 </Typography>
 
 
