@@ -7,7 +7,7 @@ const Documentation = () => {
 
     return(
         <Box sx={{ width: '100%', maxWidth: 1500 }}>
-            <Typography variant="h1" gutterBottom>
+            <Typography variant="h2" gutterBottom>
             Documentation
             </Typography>
             <Typography variant="h4" gutterBottom>
@@ -31,10 +31,7 @@ Ultimately, we have imposed additional structure onto the data to allow for new 
             </Typography>
             
             <Box sx={{mb: 5}}></Box>
-            <Typography variant="h5" gutterBottom>
-            Interesting findings/Insights:
-            </Typography>
-
+           
 
             <Typography variant="h5" gutterBottom>
             The Design Process:
@@ -127,6 +124,31 @@ Certainly, the user will have topics or tweets that are particularly relevant or
 The most important aspect of this mechanism would be in how the user revisits this information. Would these favorites remain accessible outside the particular week’s dataset? Could the data be used to create some sort of watchlist to help prioritize incoming Twitter data?
 
             </Typography>
+
+
+            What are the most captivating findings from this project?
+            
+                Using the web application's network visualization, we attempted to find different correlations by observing the size and position of each node. We thought we could use this visualization's ability to change the size of the nodes based on various factors to conduct a data analysis on this dataset.
+                After experimenting with various combinations, we discovered that there is no correlation between the tweet per day ratio and the number of followers on Twitter, but when we replaced the number of followers with the number of followers of the same focus group, we found a positive correlation. This can be explained by the fact that the contents only attract people who are interested in those topics.
+
+            
+<Box sx={{ fontWeight: 'bold', mt: 5,mb: 2 }}>
+Contributions:
+</Box>
+<Typography variant="body1" gutterBottom>
+Chika- Assembling team and meetings,Giving assignments, Analyzing data and answering document questions.
+</Typography>
+<Typography variant="body1" gutterBottom>
+Shawn- Lead development of website, contributed to data analysis and data structuring for the project.
+</Typography>
+<Typography variant="body1" gutterBottom>
+Joel-Cedric- Answering documentation questions and analyzing data to find interesting findings.
+</Typography>
+
+
+
+
+
 
            
 
