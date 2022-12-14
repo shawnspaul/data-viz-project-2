@@ -145,7 +145,7 @@ Shawn - Lead development of website, contributed to data analysis and data struc
 Joel Brauchla - Provided data and communicated its context and purpose to the design team. Contributed to data analysis and documentation as well as the design choice.
 </Typography>
 <Typography variant="body1" gutterBottom>
-Joel-Cedric - Analyzing data to discover interesting results and responding to documentation questions. Assist with simple page like the documentation page
+Joel-Cedric - Analyzing data to discover interesting results and responding to documentation questions. Assist with simple page like the documentation page.
 </Typography>
 
 
